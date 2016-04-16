@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -42,10 +44,10 @@ public class GoBangView extends View {
     private float pieceMargin = 1.0f * 3 / 4;
 
     private boolean mIsWhite = true;
-    private List<Point> mWhitePath = new ArrayList<>();
-    private List<Point> mBlackPath = new ArrayList<>();
 
     private boolean mIsGameOver = false;
+    private ArrayList<Point> mWhitePath = new ArrayList<>();
+    private ArrayList<Point> mBlackPath = new ArrayList<>();
 
     private int[] directions = new int[]{
             DIRECTION_HORIZONTAL,
@@ -279,4 +281,41 @@ public class GoBangView extends View {
         int ruleY = (int) (y / mLineSize);
         return new Point(ruleX, ruleY);
     }
+
+    public void resStartGame() {
+        mWhitePath.clear();
+        mBlackPath.clear();
+        mIsGameOver = false;
+        invalidate();
+    }
+
+
+    private static final String INSTANCE_SYSTEM = "INSTANCE_SYSTEM";
+    private static final String INSTANCE_WHITE_PATH = "INSTANCE_WHITE_PATH";
+    private static final String INSTANCE_BLACK_PATH = "INSTANCE_BLACK_PATH";
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(INSTANCE_SYSTEM, super.onSaveInstanceState());
+
+        bundle.putParcelableArrayList(INSTANCE_WHITE_PATH, mWhitePath);
+        bundle.putParcelableArrayList(INSTANCE_WHITE_PATH, mBlackPath);
+
+        return bundle;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (state instanceof Bundle) {
+            Bundle bundle = (Bundle) state;
+            mWhitePath = bundle.getParcelableArrayList(INSTANCE_WHITE_PATH);
+            mBlackPath = bundle.getParcelableArrayList(INSTANCE_BLACK_PATH);
+        } else {
+            super.onRestoreInstanceState(state);
+        }
+    }
+
+
 }

@@ -1,4 +1,4 @@
-include ':gobang'
+include ':gobang', ':aidlClient', ':aidlServer'
 include ':CoreLibs'
 
 

@@ -5,6 +5,7 @@
     android:background="@color/main_brown">
 
     <com.ray.apps.view.GoBangView
+        android:id="@+id/gv_gobang"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
