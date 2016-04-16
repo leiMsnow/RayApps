@@ -21,6 +21,9 @@
             android:name=".RemoteService"
             android:exported="true" />
 
+        <service
+            android:name=".AirService"
+            android:exported="true" />
 
     </application>
 
