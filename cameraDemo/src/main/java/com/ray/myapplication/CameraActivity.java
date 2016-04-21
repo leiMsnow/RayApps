@@ -80,7 +80,7 @@ public class CameraActivity extends AppCompatActivity {
         Camera.Parameters parameters = mCamera.getParameters();
         parameters.setPictureFormat(ImageFormat.JPEG);
         parameters.setPictureSize(1280, 720);
-        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+//        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
         mCamera.setParameters(parameters);
         mCamera.autoFocus(new Camera.AutoFocusCallback() {
             @Override
